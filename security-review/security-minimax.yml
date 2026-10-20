@@ -12,9 +12,9 @@ on:
         description: MiniMax chat model id to use for the review
         type: choice
         options:
+          - MiniMax-M3.1-Flash
           - MiniMax-M3
-          - MiniMax-M2.7
-        default: MiniMax-M3
+        default: MiniMax-M3.1-Flash
       minimax_region:
         description: MiniMax API region (selects the Anthropic-compatible base URL)
         type: choice
@@ -50,7 +50,7 @@ jobs:
           # ANTHROPIC_AUTH_TOKEN env var above takes precedence for the
           # Bearer auth MiniMax requires.
           claude-api-key: ${{ secrets.MINIMAX_API_KEY }}
-          # MiniMax-M3 (1,000,000-token context) is the default; switch the
-          # workflow_dispatch input to MiniMax-M2.7 (204,800-token context) when needed.
-          claude-model: ${{ inputs.minimax_model || 'MiniMax-M3' }}
+          # MiniMax-M3.1-Flash is the default; select MiniMax-M3 when needed.
+          # Explicit model inputs are forwarded unchanged.
+          claude-model: ${{ inputs.minimax_model || 'MiniMax-M3.1-Flash' }}
           custom-security-scan-instructions: "" # Add any custom instructions specific to your codebase here.

@@ -9,9 +9,9 @@ on:
         description: MiniMax chat model id to use for the review
         type: choice
         options:
+          - MiniMax-M3.1-Flash
           - MiniMax-M3
-          - MiniMax-M2.7
-        default: MiniMax-M3
+        default: MiniMax-M3.1-Flash
       minimax_region:
         description: MiniMax API region (selects the Anthropic-compatible base URL)
         type: choice
@@ -125,6 +125,6 @@ jobs:
 
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
           # or https://docs.anthropic.com/en/docs/claude-code/sdk#command-line for available options
-          # MiniMax-M3 (1,000,000-token context) is the default; switch the
-          # workflow_dispatch input to MiniMax-M2.7 (204,800-token context) when needed.
-          claude_args: "--model ${{ inputs.minimax_model || 'MiniMax-M3' }} --allowed-tools \"mcp__github_inline_comment__create_inline_comment,Bash(gh issue view:*),Bash(gh search:*),Bash(gh issue list:*),Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Bash(gh pr list:*)\""
+          # MiniMax-M3.1-Flash is the default; select MiniMax-M3 when needed.
+          # Explicit model inputs are forwarded unchanged.
+          claude_args: "--model ${{ inputs.minimax_model || 'MiniMax-M3.1-Flash' }} --allowed-tools \"mcp__github_inline_comment__create_inline_comment,Bash(gh issue view:*),Bash(gh search:*),Bash(gh issue list:*),Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Bash(gh pr list:*)\""
